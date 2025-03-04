@@ -1,0 +1,81 @@
+/* Live Background Animation */
+.login-container {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgb(187, 69, 229) 0%, rgb(211, 175, 15) 100%);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .login-container::before {
+    content: "";
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 80%);
+    animation: moveBackground 10s infinite linear;
+  }
+  
+  /* Animated Background Movement */
+  @keyframes moveBackground {
+    0% {
+      transform: translate(-50%, -50%);
+    }
+    50% {
+      transform: translate(50%, 50%);
+    }
+    100% {
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  /* Glassmorphism Card */
+  .glass-card {
+    width: 380px;
+    min-height: 420px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    text-align: center;
+    z-index: 10;
+  }
+  
+  /* Title Styling */
+  .glass-card h2, .glass-card h3,  .glass-card h4{
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  /* Buttons */
+  .btn {
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-light {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .btn-light:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+  }
+  
+  .btn-danger {
+    font-weight: bold;
+    background: rgba(255, 0, 0, 0.8);
+    border: none;
+  }
+  
+  .btn-danger:hover {
+    background: rgba(255, 0, 0, 1);
+    transform: scale(1.05);
+  }
+  

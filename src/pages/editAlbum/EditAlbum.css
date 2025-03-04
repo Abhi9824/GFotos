@@ -1,0 +1,27 @@
+.bg-light-subtle {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+.sumitBtn{
+    background-color: var(--secondary-color)!important;
+    color: white;
+}
+.sumitBtn:hover{
+    background-color: var(--secondary-color)!important;
+    color: white;
+    background: linear-gradient(135deg, #eba7ef, #892396);
+    transform: scale(1.02);   
+}
+
+.headingColor{
+    color: var(--secondary-color)!important;
+}
+  
+  /* Input focus effect */
+.form-control:focus {
+    border-color: #ff7e5f;
+    box-shadow: 0 0 8px rgba(255, 126, 95, 0.3);
+}
+  

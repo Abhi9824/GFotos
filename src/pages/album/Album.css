@@ -1,0 +1,80 @@
+/* General button styles */
+.btn {
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* View Album Button */
+.viewBtn {
+  background-color: var(--secondary-color) !important;
+  color: white;
+}
+
+.viewBtn:hover {
+  background: linear-gradient(135deg, #eba7ef, #892396);
+  transform: scale(1.05);
+}
+
+/* Edit Button */
+.editBtn {
+  background: #28a745;
+  color: white;
+}
+
+.editBtn:hover {
+  background: linear-gradient(135deg, #34d058, #197c29);
+  transform: scale(1.05);
+}
+
+/* Delete Button */
+.deleteBtn {
+  background: #dc3545;
+  color: white;
+}
+
+.deleteBtn:hover {
+  background: linear-gradient(135deg, #ff6b6b, #b22222);
+  transform: scale(1.05);
+}
+
+/* Share Button */
+.shareBtn {
+  background: #007bff;
+  color: white;
+}
+
+.shareBtn:hover {
+  background: linear-gradient(135deg, #0056b3, #003f7f);
+  transform: scale(1.05);
+}
+
+/* No Access Button */
+.noAccessBtn {
+  background: #6c757d;
+  color: white;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.noAccessBtn:hover {
+  opacity: 1;
+}
+
+/* Responsive Button Layout */
+@media (max-width: 576px) {
+  .d-flex.justify-content-center {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

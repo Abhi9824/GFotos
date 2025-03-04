@@ -1,0 +1,63 @@
+.custom-navbar {
+    background: linear-gradient(90deg, #873abe, #300350);
+    padding: 12px 20px;
+    box-shadow: var(--border-shadow);
+}
+
+/* Navbar Brand Styling */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Icons Styling */
+.icon {
+    font-size: 1.5rem;
+    margin-left: 5px;
+    color: #f8f9fa;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Make icons slightly larger on hover */
+.icon:hover {
+    transform: scale(1.2);
+    color: #d4a5ff;
+}
+
+/* Brand Icon */
+.icon-brand {
+    font-size: 1.5rem;
+    margin-left: 5px;
+    color: white;
+    fill: white;
+}
+
+/* Navbar Links */
+.nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+/* Navbar Links Hover Effect */
+.nav-link:hover {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Navbar Toggler Button */
+.navbar-toggler {
+    border-color: white;
+}
+
+/* Navbar Toggler Icon */
+.navbar-toggler-icon {
+    background-color: white;
+    filter: invert(1);
+    border-radius: 5px;
+    padding: 5px;
+}

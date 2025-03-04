@@ -1,0 +1,59 @@
+.sumitBtn{
+    background-color: var(--secondary-color)!important;
+    color: white;
+}
+.sumitBtn:hover{
+    background-color: var(--secondary-color)!important;
+    color: white;
+    background: linear-gradient(135deg, #eba7ef, #892396);
+    transform: scale(1.02);   
+}
+
+/* after */
+
+.image-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-text {
+  font-size: 14px;
+}
+
+.tags-container p {
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.comments-container ul {
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.btn {
+  font-size: 14px;
+}
+.card-img-top {
+  width: 100%;
+  height: 450px; 
+  object-fit: cover; 
+}
+
+
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+  }
+
+  .d-flex.flex-wrap {
+    flex-direction: column;
+  }
+}
