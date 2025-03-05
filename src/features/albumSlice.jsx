@@ -77,6 +77,26 @@ export const updateAlbumAsync = createAsyncThunk(
   }
 );
 
+export const shareAlbumAsync = createAsyncThunk(
+  "album/shareAlbum",
+  async ({ albumId, emails }) => {
+    try {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        throw new Error("Token is missing, authentication error");
+      }
+      const response = await axios.post(`${api}/${albumId}/share`, emails, {
+        headers: { Authorization: token },
+      });
+      if (response) {
+        return response.data.album;
+      }
+    } catch (error) {
+      throw new Error("Failed to share the album");
+    }
+  }
+);
+
 const albumsSlice = createSlice({
   name: "album",
   initialState: {
@@ -135,6 +155,18 @@ const albumsSlice = createSlice({
         toast.success("Album updated successfully!");
       })
       .addCase(updateAlbumAsync.rejected, (state, action) => {
+        state.albumStatus = "failed";
+        state.albumError = action.error.message;
+      })
+      .addCase(shareAlbumAsync.pending, (state) => {
+        state.albumStatus = "loading";
+      })
+      .addCase(shareAlbumAsync.fulfilled, (state, action) => {
+        state.albumStatus = "success";
+        state.albums = action.payload;
+        toast.success("Album shared successfully!");
+      })
+      .addCase(shareAlbumAsync.rejected, (state, action) => {
         state.albumStatus = "failed";
         state.albumError = action.error.message;
       });

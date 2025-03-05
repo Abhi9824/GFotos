@@ -2,11 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../utils/baseUrl";
 
-// Login with Google (Redirect to OAuth)
-export const googleLogin = createAsyncThunk("user/googleLogin", async () => {
-  window.location.href = `${BASE_URL}/auth/google`;
-});
-
 // Fetch User Profile After Google Login
 export const fetchProfile = createAsyncThunk("user/fetchProfile", async () => {
   try {
@@ -44,6 +39,18 @@ export const logoutUser = createAsyncThunk("user/logout", async () => {
   }
 });
 
+export const getAllUsers = createAsyncThunk("users/fetchAllusers", async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users`);
+    if (response) {
+      console.log("users", response.data.users);
+      return response.data.users;
+    }
+  } catch (error) {
+    throw new Error("Failed to fetch the users");
+  }
+});
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -52,6 +59,7 @@ const userSlice = createSlice({
     isLoggedIn: !!localStorage.getItem("access_token"),
     status: "idle",
     error: null,
+    users: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -83,6 +91,18 @@ const userSlice = createSlice({
         localStorage.removeItem("user");
       })
       .addCase(logoutUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+
+      .addCase(getAllUsers.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.status = "success";
+        state.users = action.payload;
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

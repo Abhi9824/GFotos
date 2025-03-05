@@ -19,7 +19,6 @@
     color: var(--secondary-color)!important;
 }
   
-  /* Input focus effect */
 .form-control:focus {
     border-color: #ff7e5f;
     box-shadow: 0 0 8px rgba(255, 126, 95, 0.3);

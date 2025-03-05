@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchImages, addImage } from "../../features/imageSlice";
 import { fetchAlbums } from "../../features/albumSlice";
 import { useParams, Link } from "react-router-dom";
-import "./ImageList.css"; // Import custom CSS
+import "./ImageList.css";
+import Loading from "../Loading/Loading";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ImageList = () => {
   const dispatch = useDispatch();
   const { albumId } = useParams();
-  const { images, imageStatus, imageError } = useSelector(
-    (state) => state.image
-  );
   const { albums, albumStatus } = useSelector((state) => state.album);
 
-  // 🔹 Track the current album state separately
+  // Tracking the current album state separately
   const [currentAlbum, setCurrentAlbum] = useState(null);
   const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
@@ -21,11 +21,17 @@ const ImageList = () => {
   const [person, setPerson] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const [showFavorites, setShowFavorites] = useState(false);
+
+  const toggleFavorites = () => {
+    setShowFavorites((prev) => !prev);
+  };
+
   useEffect(() => {
     dispatch(fetchAlbums());
+    dispatch(fetchImages(albumId));
   }, []);
 
-  // 🔹 Update `currentAlbum` when `albums` change
   useEffect(() => {
     const foundAlbum = albums.find((album) => album?._id === albumId);
     setCurrentAlbum(foundAlbum);
@@ -35,12 +41,24 @@ const ImageList = () => {
     setShow(!show);
   };
 
-  const handleFileChange = (e) => setFile(e.target.files[0]);
+  // const handleFileChange = (e) => setFile(e.target.files[0]);
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      if (selectedFile.size > 5242880) {
+        // 5MB in bytes
+        toast.warn("File size exceeds 5MB! Please upload a smaller file.");
+        return;
+      }
+      setFile(selectedFile);
+    }
+  };
+
   const handleTagsChange = (e) => setTags(e.target.value);
   const handlePersonChange = (e) => setPerson(e.target.value);
   const handleFavoriteChange = (e) => setIsFavorite(e.target.checked);
 
-  // 🔹 Handle image upload and refresh albums/images
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -61,34 +79,46 @@ const ImageList = () => {
     });
   };
 
-  // 🔹 Show loading state if albums are not yet loaded
-  if (albumStatus === "loading" || !albums.length)
-    return <p>Loading album...</p>;
-  if (imageStatus === "loading")
-    return <p className="text-center">Loading images...</p>;
-  if (imageStatus === "failed")
-    return <p className="text-center text-danger">Error: {imageError}</p>;
+  const filteredImages = showFavorites
+    ? currentAlbum?.images?.filter((img) => img.isFavorite) || []
+    : currentAlbum?.images || [];
+
+  if (albumStatus === "loading" || !albums.length) return <Loading />;
 
   return (
-    <div className="container py-5">
+    <div className="container py-4">
       <div className="d-flex justify-content-between align-items-center py-2 mb-4">
-        <div>
-          <h2 className="text-center">📷 {currentAlbum?.name}</h2>
-        </div>
-        <div>
-          <button className="btn sumitBtn" onClick={toggleImageModal}>
-            Upload Image
-          </button>
+        <div className="d-flex justify-content-between align-items-center mb-2 gap-2 w-100">
+          <div>
+            <h2 className="mb-3 mb-md-0 fw-semibold">
+              📷 {currentAlbum?.name}
+            </h2>
+          </div>
+          <div className="d-flex gap-3 ms-auto">
+            {" "}
+            {/* Added ms-auto */}
+            <button
+              className="btn btn-secondary w-md-auto"
+              onClick={toggleFavorites}
+            >
+              {showFavorites ? "Show All" : "Show Favorites"}
+            </button>
+            <button
+              className="btn sumitBtn w-md-auto"
+              onClick={toggleImageModal}
+            >
+              Upload Image
+            </button>
+          </div>
         </div>
       </div>
       <div className="row">
-        {currentAlbum && currentAlbum.images?.length > 0 ? (
-          currentAlbum.images.map((img) => (
+        {filteredImages && filteredImages?.length > 0 ? (
+          filteredImages.map((img) => (
             <div key={img._id} className="col-lg-4 col-md-6 col-sm-12 mb-4">
               <Link
                 to={`/albums/${currentAlbum?._id}/images/${img?._id}`}
                 className="image-link"
-                // state={{ currentAlbum }}
                 state={{ albumId: currentAlbum?._id }}
               >
                 <div className="card image-card">

@@ -2,6 +2,10 @@
     background: linear-gradient(90deg, #873abe, #300350);
     padding: 12px 20px;
     box-shadow: var(--border-shadow);
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    z-index: 3;
 }
 
 /* Navbar Brand Styling */

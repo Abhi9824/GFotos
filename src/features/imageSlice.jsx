@@ -187,6 +187,7 @@ export const fetchFavoriteImages = createAsyncThunk(
   }
 );
 
+
 const imagesSlice = createSlice({
   name: "image",
   initialState: {

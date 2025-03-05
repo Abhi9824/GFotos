@@ -46,19 +46,20 @@ const Login = () => {
   }, [dispatch, navigate]);
 
   return (
-    <div>
-      <div className="container">
-        <div className="d-flex container justify-content-between align-items-center py-4">
+    <div className="login-container">
+      <div className="login-card">
+        <div>
+          {" "}
           <h1>Welcome to GFotos</h1>
-          <div className="d-flex m-2">
-            {!isLoggedIn && (
-              <button onClick={googleLogin}>
-                <FcGoogle />
-                <span> with Google</span>
-              </button>
-            )}
-          </div>
+          <h3>Saved Memories with Us!</h3>
         </div>
+
+        {!isLoggedIn && (
+          <button className="google-login-btn" onClick={googleLogin}>
+            <FcGoogle className="google-icon" />
+            <span>Sign in with Google</span>
+          </button>
+        )}
       </div>
     </div>
   );

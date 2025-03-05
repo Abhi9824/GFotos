@@ -30,12 +30,6 @@ const ImageDetails = () => {
   const [comment, setComment] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // const imageDetails = images?.find((img) => {
-  //   console.log("img kai", img?._id);
-  //   console.log("imageId ka hai", imageId);
-
-  //   return img?._id === imageId;
-  // });
   const imageDetails = images?.find((img) => img?._id === imageId) || {};
 
   const [tags, setTags] = useState("");
@@ -45,10 +39,6 @@ const ImageDetails = () => {
   const toggleImageModal = () => {
     setEditModal(!editModal);
   };
-
-  console.log("imageId", imageId);
-  console.log("albumId", albumId);
-  console.log("images", images);
 
   console.log("imageDetails", imageDetails);
 
@@ -76,8 +66,9 @@ const ImageDetails = () => {
     return <div className="container text-center mt-4">Loading...</div>;
   }
 
-  const handleDelete = () => {
-    dispatch(deleteImage({ imageId, albumId }));
+  const handleDelete = async () => {
+    await dispatch(deleteImage({ imageId, albumId }));
+    await dispatch(fetchImages(albumId));
     navigate(-1);
   };
   const commentHandler = () => {
@@ -127,8 +118,8 @@ const ImageDetails = () => {
   }, [imageDetails]);
 
   return (
-    <div className="container d-flex justify-content-center mt-4">
-      <div className="card shadow-lg border-0" style={{ width: "50rem" }}>
+    <div className="d-flex justify-content-center mt-4">
+      <div className="card shadow-lg border-0 image-card p-0">
         <img
           src={imageDetails?.imageUrl}
           className="card-img-top rounded img-fluid"
@@ -148,17 +139,14 @@ const ImageDetails = () => {
             {imageDetails.person ? imageDetails.person : "No person added"}
           </p>
 
-          {imageDetails.tags &&
-          imageDetails.tags.length > 0 &&
-          imageDetails.tags[0] !== "" ? (
+          {imageDetails.tags?.length > 0 ? (
             <p className="card-text">
               <strong>Tags:</strong> {imageDetails.tags.join(", ")}
             </p>
-          ) : (
-            <p>No Tags Added</p>
-          )}
+          ) : null}
+
           {imageDetails.comments && imageDetails.comments.length > 0 ? (
-            <p className="card-text">
+            <div className="card-text">
               <strong>Comments:</strong>
               <ul className="list-unstyled">
                 {imageDetails?.comments?.map((c, index) => (
@@ -167,7 +155,7 @@ const ImageDetails = () => {
                   </li>
                 ))}
               </ul>
-            </p>
+            </div>
           ) : (
             <p className="card-text text-muted">No comments</p>
           )}

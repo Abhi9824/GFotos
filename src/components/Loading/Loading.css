@@ -1,4 +1,4 @@
-.spinner-color{
+/* .spinner-color{
     color: var(--text-color);
     box-shadow: var(--shadow);
 } 
@@ -8,4 +8,45 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-}
+} */
+
+/* Full-screen center positioning */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Light overlay */
+    z-index: 9999;
+  }
+  
+  /* Box to hold the loading placeholders */
+  .loader-box {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Placeholder simulating image loading */
+  .image-placeholder {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(90deg, #f3f3f3 25%, #ecebeb 50%, #f3f3f3 75%);
+    background-size: 200% 100%;
+    border-radius: 10px;
+    animation: shimmer 1.5s infinite linear;
+  }
+  
+  /* Shimmer effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  

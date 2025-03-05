@@ -15,6 +15,7 @@ import { fetchProfile } from "./features/userSlice";
 import EditAlbum from "./pages/editAlbum/EditAlbum";
 import ImageList from "./components/Images/ImageList";
 import ImageDetails from "./pages/imageDetails/imageDetails";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { status } = useSelector((state) => state.user);
@@ -28,20 +29,19 @@ function App() {
     }
   }, []);
   return (
-    <div>
+    <div className="main-container">
       <ToastContainer
         position="bottom-right"
         autoClose={3000}
         closeOnClick
         draggable
       />
-
+      <Navbar />
       {status === "loading" ? (
         <Loading />
       ) : (
         <>
-          <Navbar />
-          <div>
+          <div className="route-container">
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route
