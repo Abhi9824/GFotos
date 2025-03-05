@@ -14,7 +14,7 @@ import AddAlbum from "./pages/addAlbum/AddAlbum";
 import { fetchProfile } from "./features/userSlice";
 import EditAlbum from "./pages/editAlbum/EditAlbum";
 import ImageList from "./components/Images/ImageList";
-import ImageDetails from "./pages/imageDetails/imageDetails";
+import ImageDetails from "./pages/imageDetails/ImageDetails";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
