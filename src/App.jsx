@@ -4,17 +4,17 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
-import Loading from "./components/Loading/Loading";
+import Loading from "./components/Loading/Loading.jsx";
 import { RequireAuth } from "./utils/auth";
-import Home from "./pages/home/Home";
-import Navbar from "./components/Navbar/Navbar";
-import Login from "./pages/auth/Login";
-import Profile from "./pages/profile/Profile";
-import AddAlbum from "./pages/addAlbum/AddAlbum";
+import Home from "./pages/home/Home.jsx";
+import Navbar from "./components/Navbar/Navbar.jsx";
+import Login from "./pages/auth/Login.jsx";
+import Profile from "./pages/profile/Profile.jsx";
+import AddAlbum from "./pages/addAlbum/AddAlbum.jsx";
 import { fetchProfile } from "./features/userSlice";
-import EditAlbum from "./pages/editAlbum/EditAlbum";
-import ImageList from "./components/Images/ImageList";
-import ImageDetails from "./pages/imageDetails/imageDetails";
+import EditAlbum from "./pages/editAlbum/EditAlbum.jsx";
+import ImageList from "./components/Images/ImageList.jsx";
+import ImageDetails from "./pages/imageDetails/imageDetails.jsx";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
