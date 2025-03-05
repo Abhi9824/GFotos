@@ -39,7 +39,6 @@ const Album = () => {
     dispatch(shareAlbumAsync({ albumId, emails: selectedEmails }));
     setShowModal(false);
   };
-  console.log("users", users);
 
   useEffect(() => {
     if (!albums.length) {

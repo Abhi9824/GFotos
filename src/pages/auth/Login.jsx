@@ -11,7 +11,9 @@ const Login = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
 
   const googleLogin = () => {
-    window.location.href = "http://localhost:4000/auth/google";
+    window.location.href = `${
+      import.meta.env.VITE_SERVER_BASE_URL
+    }/auth/google`;
   };
 
   useEffect(() => {
