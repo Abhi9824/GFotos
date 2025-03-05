@@ -6,7 +6,7 @@ export const RequireAuth = ({ children }) => {
   const { isLoggedIn, status } = useSelector((state) => state.user);
   const location = useLocation();
 
-  if (status === "loading") return <Loading />; // Wait for profile to load
+  if (status === "loading") return <Loading />; 
 
   if (!isLoggedIn) {
     return <Navigate to="/login" state={{ from: location }} />;

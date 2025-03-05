@@ -20,9 +20,6 @@ export const fetchProfile = createAsyncThunk("user/fetchProfile", async () => {
 
     return { user: data.user, token };
   } catch (error) {
-    // if (error.response?.status === 401) {
-    //   localStorage.removeItem("access_token");
-    // }
     console.error("Error fetching profile:", error);
     throw error.response?.data || "Unknown error";
   }
@@ -43,7 +40,6 @@ export const getAllUsers = createAsyncThunk("users/fetchAllusers", async () => {
   try {
     const response = await axios.get(`${BASE_URL}/users`);
     if (response) {
-      console.log("users", response.data.users);
       return response.data.users;
     }
   } catch (error) {

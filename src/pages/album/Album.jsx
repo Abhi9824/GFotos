@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAlbums, deleteAlbum } from "../../features/albumSlice";
 import { Link } from "react-router-dom";
-import { FaEdit, FaTrash, FaShareAlt } from "react-icons/fa"; // Import icons
+import { FaEdit, FaTrash, FaShareAlt } from "react-icons/fa"; 
 import { toast } from "react-toastify";
 import "./Album.css";
 import { getAllUsers } from "../../features/userSlice";
@@ -10,7 +10,6 @@ import { shareAlbumAsync } from "../../features/albumSlice";
 
 const Album = () => {
   const dispatch = useDispatch();
-  // const { albums } = useSelector((state) => state.album);
   const { albums = [] } = useSelector((state) => state.album || {});
 
   const { user, users } = useSelector((state) => state.user);
@@ -35,7 +34,6 @@ const Album = () => {
       toast.warn("⚠️ Please select at least one email!");
       return;
     }
-
     dispatch(shareAlbumAsync({ albumId, emails: selectedEmails }));
     setShowModal(false);
   };

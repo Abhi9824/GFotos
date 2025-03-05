@@ -85,9 +85,13 @@ export const shareAlbumAsync = createAsyncThunk(
       if (!token) {
         throw new Error("Token is missing, authentication error");
       }
-      const response = await axios.post(`${api}/${albumId}/share`, emails, {
-        headers: { Authorization: token },
-      });
+      const response = await axios.post(
+        `${api}/${albumId}/share`,
+        { emails },
+        {
+          headers: { Authorization: token },
+        }
+      );
       if (response) {
         return response.data.album;
       }
